@@ -27,7 +27,7 @@ bunch:[SIZE]
  * \N - null-reference represent null value
  * '=' - separator for prefix and repetition group
  
- ## Example
+## Example
  
  Archive contains 1 bunch of 3 rows. Archive contains fields:
   * transaction_id
@@ -51,3 +51,9 @@ bunch:[SIZE]
  1025456123;"This is sms text";"2017-10-01 16:02:13";1
  1025456124;"This is sms text";"2017-10-01 16:02:23";1
  ```
+
+# Column types
+ * String
+ * Integer/Numeric
+ * Enum
+ * DateTime
