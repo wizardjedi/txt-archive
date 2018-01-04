@@ -5,7 +5,13 @@
 
 # Specification
 
-Archive file - human readable text with compression/repetition rules. Main idea - store data by columns instead of rows.
+Archive file - human readable text with compression/repetition rules. Main idea - group data to bunch of rows and store data by columns instead of rows. In this case we can use extra optimizations for data compression: 
+ * repetiton of values instead of full list of values
+ * delta coding for int values
+ * date time to int conversion and decreasing precision
+
+![Schema](docs/images/main.png)
+
 
 ## Archive file format
 
