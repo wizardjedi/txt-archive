@@ -63,3 +63,15 @@ bunch:[SIZE]
  * Integer/Numeric
  * Enum
  * DateTime
+
+## String column
+TODO!
+
+## Integer/Numeric column
+Delta coding
+
+## Enum
+Create dictionary (default dictionary for global values and local dictionary for bunch) of values and use indexes instead of values.
+
+## DateTime
+Convert date/time to timestamp and reduce precision. For example in SMPP protocol only minutes returning in case of delivery report. So we can reduce second part and save diskspace.
