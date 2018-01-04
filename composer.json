@@ -1,0 +1,12 @@
+{
+    "name":"txt-archive/txt-archive",
+    "description":"Human readable compression for datasets",
+    "require": {
+        "phpunit/phpunit": "^5.7"
+    },
+    "autoload": {
+        "classmap": [
+            "src/"
+        ]
+    }
+}
