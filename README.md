@@ -3,6 +3,21 @@
 [![travis ci](https://travis-ci.org/wizardjedi/txt-archive.svg?branch=master)](https://travis-ci.org/wizardjedi/txt-archive.svg?branch=master)
 [![codecov](https://codecov.io/gh/wizardjedi/txt-archive/branch/master/graph/badge.svg)](https://codecov.io/gh/wizardjedi/txt-archive)
 
+# Motivation
+
+We have a huge amount of immutable data. In other words it's a immutable but appendable log.
+Our storage contains hundreds of gigabytes of archived CSV-files. In this case we have operations like batch append and rarely(for example, 1 time per few months) search.
+
+So we have well defined and well known structure and values in files. We don't need indexes because search operations are very rare. And most valuable for us is effectiveness of data storage.
+
+We tried:
+ * Apache Parquet
+ * Apache Avro
+ * Compressed parquet and avro
+ * Compressed CSV-files
+
+In our tests compressed CSV-files were the best in case of disk space.
+
 # Specification
 
 Archive file - human readable text with compression/repetition rules. Main idea - group data to bunch of rows and store data by columns instead of rows. In this case we can use extra optimizations for data compression: 
