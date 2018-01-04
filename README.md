@@ -3,9 +3,30 @@
 [![travis ci](https://travis-ci.org/wizardjedi/txt-archive.svg?branch=master)](https://travis-ci.org/wizardjedi/txt-archive.svg?branch=master)
 [![codecov](https://codecov.io/gh/wizardjedi/txt-archive/branch/master/graph/badge.svg)](https://codecov.io/gh/wizardjedi/txt-archive)
 
+# Motivation
+
+We have a huge amount of immutable data. In other words it's a immutable but appendable log.
+Our storage contains hundreds of gigabytes of archived CSV-files. In this case we have operations like batch append and rarely(for example, 1 time per few months) search.
+
+So we have well defined and well known structure and values in files. We don't need indexes because search operations are very rare. And most valuable for us is effectiveness of data storage.
+
+We tried:
+ * Apache Parquet
+ * Apache Avro
+ * Compressed parquet and avro
+ * Compressed CSV-files
+
+In our tests compressed CSV-files were the best in case of disk space.
+
 # Specification
 
-Archive file - human readable text with compression/repetition rules. Main idea - store data by columns instead of rows.
+Archive file - human readable text with compression/repetition rules. Main idea - group data to bunch of rows and store data by columns instead of rows. In this case we can use extra optimizations for data compression: 
+ * repetiton of values instead of full list of values
+ * delta coding for int values
+ * date time to int conversion and decreasing precision
+
+![Schema](docs/images/main.png)
+
 
 ## Archive file format
 
@@ -57,3 +78,15 @@ bunch:[SIZE]
  * Integer/Numeric
  * Enum
  * DateTime
+
+## String column
+TODO!
+
+## Integer/Numeric column
+Delta coding
+
+## Enum
+Create dictionary (default dictionary for global values and local dictionary for bunch) of values and use indexes instead of values.
+
+## DateTime
+Convert date/time to timestamp and reduce precision. For example in SMPP protocol only minutes returning in case of delivery report. So we can reduce second part and save diskspace.
